@@ -18,7 +18,8 @@
 </form>
 <div class="gallery">
   {% for artist in artists %}
-  <a href="">
+<!-- Here we are changing the href of the a tag to use the url DTL -->
+  <a href="{% url 'artist_detail' artist.pk %}">
     <div class="card">
       <div class="card-image">
         <figure class="image is-square">
@@ -27,7 +28,6 @@
       </div>
       <div class="card-header">
         <p class="card-header-title">{{artist.name}}</p>
-        <p class="card-header-title">{{artist.bio}}</p>
       </div>
     </div>
   </a>

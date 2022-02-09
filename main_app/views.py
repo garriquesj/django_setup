@@ -4,6 +4,7 @@ from django.views import View # <- View class to handle requests
 from django.http import HttpResponse # <- a class to handle sending a type of response
 from .models import Artist
 from django.views.generic.edit import CreateView
+from django.views.generic import DetailView
 
 # Create your views here.
 
@@ -36,3 +37,7 @@ class ArtistCreate(CreateView):
     fields = ['name', 'img', 'bio', 'verified_artist']
     template_name = "artist_create.html"
     success_url = "/artists/"
+
+class ArtistDetail(DetailView):
+    model = Artist
+    template_name = "artist_detail.html"
