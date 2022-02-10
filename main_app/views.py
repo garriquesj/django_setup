@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
+from django.shortcuts import redirect
 from django.views import View # <- View class to handle requests
-from django.http import HttpResponse # <- a class to handle sending a type of response
+# from django.http import HttpResponse # <- a class to handle sending a type of response
 from .models import Artist
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -58,3 +59,12 @@ class ArtistDelete(DeleteView):
     model = Artist
     template_name = "artist_delete_confirmation.html"
     success_url = "/artists/"
+
+class SongCreate(View):
+
+    def post(self, request, pk):
+        title = request.POST.get("title")
+        length = request.POST.get("length")
+        artist = Artist.objects.get(pk=pk)
+        Song.objects.create(title=title, length=length, artist=artist)
+        return redirect('artist_detail', pk=pk)
